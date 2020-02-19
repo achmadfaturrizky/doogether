@@ -81,27 +81,6 @@ class Home extends Component {
   setModalDetailVisible(modalVisibleDetail) {
     this.setState({modalVisibleDetail});
   }
-
-  checkData = async () => {
-    const {title, description, modalVisible} = this.state;
-    const data = [
-      {
-        title,
-        description,
-        date: new Date(new Date().getTime()),
-        id: new Date().getTime(),
-        done: false,
-      },
-    ];
-    const list = await AsyncStorage.getItem('@todo_list');
-    this.state.todoList = list;
-    const y = JSON.parse(this.state.todoList);
-    await y.push(data[0]);
-    AsyncStorage.setItem('@todo_list', JSON.stringify(y));
-    await this.getData();
-    this.setModalVisible(!modalVisible);
-  };
-
   inputData = async () => {
     const {title, description, modalVisible} = this.state;
     const data = [
@@ -113,48 +92,56 @@ class Home extends Component {
         done: false,
       },
     ];
-    (await AsyncStorage.getItem('@todo_list')) == null
-      ? title === ''
-        ? ToastAndroid.showWithGravity(
-            'Title must be filled!',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-          )
-        : description === ''
-        ? ToastAndroid.showWithGravity(
-            'Description must bee filled!',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-          )
-        : ToastAndroid.showWithGravity(
-            'Task successfully added',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-            AsyncStorage.setItem('@todo_list', JSON.stringify(data)),
-            this.getData(),
-            this.setModalVisible(!modalVisible),
-          )
-      : title === ''
-      ? ToastAndroid.showWithGravity(
+    if ((await AsyncStorage.getItem('@todo_list')) == null) {
+      if (title === '') {
+        return ToastAndroid.showWithGravity(
           'Title must be filled!',
           ToastAndroid.SHORT,
           ToastAndroid.CENTER,
-        )
-      : description === ''
-      ? ToastAndroid.showWithGravity(
-          'Description must bee filled!',
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        )
-      : ToastAndroid.showWithGravity(
-          'Task successfully added',
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-          this.checkData(),
         );
+      } else if (description === '') {
+        return ToastAndroid.showWithGravity(
+          'Description must be filled!',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+        );
+      }
+      ToastAndroid.showWithGravity(
+        'Task successfully added',
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+      AsyncStorage.setItem('@todo_list', JSON.stringify(data));
+      this.getTodo();
+    } else {
+      if (title === '') {
+        return ToastAndroid.showWithGravity(
+          'Title must be filled!',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+        );
+      } else if (description === '') {
+        return ToastAndroid.showWithGravity(
+          'Description must be filled!',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+        );
+      }
+      ToastAndroid.showWithGravity(
+        'Task successfully added',
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+      const list = await AsyncStorage.getItem('@todo_list');
+      this.state.todoList = list;
+      const y = JSON.parse(this.state.todoList);
+      await y.push(data[0]);
+      AsyncStorage.setItem('@todo_list', JSON.stringify(y));
+      await this.getData();
+      this.setModalVisible(!modalVisible);
+    }
   };
-
-  removeData = async item => {
+  removeDataModal = async item => {
     const {todoList2, modalVisibleDetail} = this.state;
     item.done = !item.done;
     await this.forceUpdate();
@@ -169,6 +156,22 @@ class Home extends Component {
       : this.setState({done: false});
     await this.removeSuccess();
     this.setModalDetailVisible(!modalVisibleDetail);
+  };
+
+  removeData = async item => {
+    const {todoList2} = this.state;
+    item.done = !item.done;
+    await this.forceUpdate();
+    await this.filterRemove(item);
+    let checked = Array.from(new Set(todoList2));
+    let checked2 = [];
+    checked.filter(data => {
+      data.done === false ? checked2.push(item) : null;
+    });
+    checked2.length !== checked.length
+      ? this.setState({done: true})
+      : this.setState({done: false});
+    this.removeSuccess();
   };
 
   filterRemove = async item => {
@@ -315,7 +318,8 @@ class Home extends Component {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <View style={styles.cardHeaderModal}>
-                <TouchableOpacity onPress={() => this.removeData(detailData)}>
+                <TouchableOpacity
+                  onPress={() => this.removeDataModal(detailData)}>
                   <Image
                     style={styles.checkboxIconModal}
                     source={require('../../assets/icon/checkbox.png')}
