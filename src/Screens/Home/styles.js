@@ -34,9 +34,6 @@ module.exports = StyleSheet.create({
     marginRight: 10,
   },
   content: {
-    marginTop: 20,
-    justifyContent: 'space-around',
-    alignItems: 'flex-start',
     flexDirection: 'row',
   },
   cardHeaderModal: {
@@ -47,6 +44,9 @@ module.exports = StyleSheet.create({
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  row: {
+    paddingBottom: 70,
   },
   cardContainer: {
     width: '40%',

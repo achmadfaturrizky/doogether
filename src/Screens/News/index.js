@@ -98,7 +98,7 @@ class News extends Component {
         await this.setState({
           inputContainer: false,
         });
-        this.setState({isLoading: false});
+        this.setState({isLoading: false, body: '', title: ''});
         ToastAndroid.showWithGravity(
           'News Data has been inserted',
           ToastAndroid.SHORT,
@@ -158,7 +158,7 @@ class News extends Component {
           </TouchableOpacity>
           <View style={styles.containerBackground}>
             <Text style={styles.titleBackground}>{titleHeadline}</Text>
-            <Text>{descHeadline}</Text>
+            <Text style={styles.descHeadline}>{descHeadline}</Text>
           </View>
         </ImageBackground>
         <View style={styles.containerTitle}>

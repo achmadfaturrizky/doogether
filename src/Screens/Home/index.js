@@ -105,6 +105,7 @@ class Home extends Component {
           ToastAndroid.CENTER,
         );
       }
+      this.setState({title: '', description: ''});
       ToastAndroid.showWithGravity(
         'Task successfully added',
         ToastAndroid.SHORT,
@@ -127,6 +128,7 @@ class Home extends Component {
           ToastAndroid.CENTER,
         );
       }
+      this.setState({title: '', description: ''});
       ToastAndroid.showWithGravity(
         'Task successfully added',
         ToastAndroid.SHORT,
@@ -238,7 +240,7 @@ class Home extends Component {
             <Text style={styles.textDateHeader}>{dateNow}</Text>
           </View>
         </View>
-        <View style={styles.content}>
+        <View>
           <FlatList
             showsVerticalScrollIndicator={false}
             numColumns={2}
@@ -246,6 +248,7 @@ class Home extends Component {
             keyExtractor={this._keyExtractor}
             renderItem={this.renderItem}
             ListEmptyComponent={this.emptyData()}
+            contentContainerStyle={styles.row}
           />
         </View>
         <View style={styles.contentFab}>

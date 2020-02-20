@@ -94,8 +94,12 @@ module.exports = StyleSheet.create({
   },
   titleNews: {
     fontFamily: fonts.medium,
-    width: 230,
+    width: 200,
     fontSize: 16,
+  },
+  descHeadline: {
+    fontFamily: fonts.book,
+    marginRight: 20,
   },
   contentNews: {
     flexDirection: 'column',
@@ -104,7 +108,7 @@ module.exports = StyleSheet.create({
   },
   descriptionNews: {
     fontFamily: fonts.book,
-    width: 230,
+    width: 200,
   },
   modalContainer: {
     flex: 1,

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Image, Text, Keyboard, View} from 'react-native';
+import React from 'react';
+import {Image, Text} from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import Home from '../Screens/Home';
@@ -92,7 +92,6 @@ export const BottomNavigator = createBottomTabNavigator(
         },
         shadowOpacity: 0.41,
         shadowRadius: 9.11,
-
         elevation: 14,
       },
     },
