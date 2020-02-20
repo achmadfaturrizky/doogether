@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
 import {
   View,
-  StyleSheet,
   Text,
   TouchableOpacity,
   Image,
   PermissionsAndroid,
 } from 'react-native';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 
 import MapStyle from './mapStyle';
-import fonts from '../../Components/config/fonts';
+import styles from './styles';
 
 class Location extends Component {
   state = {
@@ -57,7 +56,7 @@ class Location extends Component {
       <View style={styles.container}>
         <MapView
           customMapStyle={MapStyle}
-          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+          provider={PROVIDER_GOOGLE}
           style={styles.map}
           region={{
             latitude: latitude || 0,
@@ -115,88 +114,3 @@ class Location extends Component {
 }
 
 export default Location;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  buttonBack: {
-    backgroundColor: '#fff',
-    width: 40,
-    height: 40,
-    borderRadius: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-    marginLeft: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-
-    elevation: 11,
-  },
-  iconBack: {
-    width: 15,
-    height: 15,
-  },
-  marker: {
-    height: 50,
-    width: 50,
-  },
-  bubble: {
-    borderRadius: 10,
-  },
-  content: {
-    justifyContent: 'space-between',
-    flexDirection: 'column',
-    flex: 1,
-  },
-  footer: {
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    width: '100%',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-    elevation: 11,
-    flexDirection: 'row',
-  },
-  title: {
-    fontFamily: fonts.book,
-    fontSize: 13,
-  },
-  textContentFooter: {
-    fontFamily: fonts.book,
-  },
-  avatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 60,
-    marginBottom: 30,
-    marginTop: 30,
-    marginLeft: 20,
-  },
-  contentFooter: {
-    marginLeft: 20,
-    justifyContent: 'center',
-  },
-  textName: {
-    fontFamily: fonts.bold,
-    fontSize: 17,
-  },
-  contentFooterBottom: {
-    marginTop: 5,
-  },
-});
