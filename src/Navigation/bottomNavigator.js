@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import Home from '../Screens/Home';
 import News from '../Screens/News';
+import Location from '../Screens/Location';
 
 export const BottomNavigator = createBottomTabNavigator(
   {
@@ -54,7 +55,7 @@ export const BottomNavigator = createBottomTabNavigator(
       },
     },
     Place: {
-      screen: Home,
+      screen: Location,
       navigationOptions: {
         tabBarLabel: ({tintColor}) => (
           <Text
