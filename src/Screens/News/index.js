@@ -19,6 +19,10 @@ import styles from './styles';
 const imageNews = require('../../assets/news2.jpg');
 const imageNews2 = require('../../assets/news.jpg');
 
+const titleHeadline = 'Ini Berita Masa Kini';
+const descHeadline =
+  'est rerum tempore vitae sequi sint nihil reprehenderit dolor beatae ea dolores neque fugiat est rerum tempore vitaensequi sint nihil reprehenderit dolor beatae ea dolores neque nfugiat';
+
 class News extends Component {
   state = {
     dataNews: [],
@@ -75,7 +79,7 @@ class News extends Component {
 
   handlePost = async () => {
     const {title, body} = this.state;
-    if (title === '' && body === '') {
+    if (title === '') {
       return ToastAndroid.showWithGravity(
         'Title must be filled!',
         ToastAndroid.SHORT,
@@ -137,7 +141,6 @@ class News extends Component {
 
   render() {
     const {dataNews, isLoading} = this.state;
-    console.log(dataNews);
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -154,12 +157,8 @@ class News extends Component {
             />
           </TouchableOpacity>
           <View style={styles.containerBackground}>
-            <Text style={styles.titleBackground}>Ini Berita Masa Kini</Text>
-            <Text>
-              est rerum tempore vitae\nsequi sint nihil reprehenderit dolor
-              beatae ea dolores neque\nfugiat est rerum tempore vitae\nsequi
-              sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat
-            </Text>
+            <Text style={styles.titleBackground}>{titleHeadline}</Text>
+            <Text>{descHeadline}</Text>
           </View>
         </ImageBackground>
         <View style={styles.containerTitle}>

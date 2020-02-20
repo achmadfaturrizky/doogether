@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ScrollView,
   FlatList,
   Image,
   Modal,
@@ -92,7 +91,7 @@ class Home extends Component {
         done: false,
       },
     ];
-    if ((await AsyncStorage.getItem('@todo_list')) == null) {
+    if ((await AsyncStorage.getItem('@todo_list')) === null) {
       if (title === '') {
         return ToastAndroid.showWithGravity(
           'Title must be filled!',

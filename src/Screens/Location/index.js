@@ -35,7 +35,6 @@ class Location extends Component {
     if (hasLocationPermission) {
       await Geolocation.getCurrentPosition(
         async position => {
-          console.log(position);
           await this.setState({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -51,7 +50,6 @@ class Location extends Component {
 
   render() {
     const {latitude, longitude} = this.state;
-    console.log(latitude, longitude);
     return (
       <View style={styles.container}>
         <MapView
