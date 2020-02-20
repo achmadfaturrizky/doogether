@@ -29,20 +29,23 @@ class News extends Component {
     modalVisible: false,
   };
 
-  componentDidMount = () => {
-    this.getData();
+  componentDidMount = async () => {
+    await this.getData();
   };
 
   getData = async () => {
-    const {dataNews} = this.state;
     if ((await AsyncStorage.getItem('@data_news')) === null) {
       await axios
         .get('https://jsonplaceholder.typicode.com/posts')
         .then(res => {
+          console.log(res.data);
           const data = res.data;
           this.setState({dataNews: data});
         });
-      await AsyncStorage.setItem('@data_news', JSON.stringify(dataNews));
+      await AsyncStorage.setItem(
+        '@data_news',
+        JSON.stringify(this.state.dataNews),
+      );
       const data2 = await AsyncStorage.getItem('@data_news');
       this.setState({
         dataNews: JSON.parse(data2),
@@ -134,7 +137,7 @@ class News extends Component {
 
   render() {
     const {dataNews, isLoading} = this.state;
-
+    console.log(dataNews);
     return (
       <View style={styles.container}>
         <ImageBackground

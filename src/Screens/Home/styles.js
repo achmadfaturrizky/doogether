@@ -94,7 +94,7 @@ module.exports = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
     alignSelf: 'flex-end',
-    right: 10,
+    right: 20,
   },
   iconFab: {
     width: 20,
@@ -156,7 +156,7 @@ module.exports = StyleSheet.create({
     marginBottom: 15,
     borderRadius: 5,
     width: '90%',
-    height: 35,
+    height: 40,
     borderWidth: 1,
     borderColor: '#C8CEC4',
   },

@@ -112,7 +112,8 @@ class Home extends Component {
         ToastAndroid.CENTER,
       );
       AsyncStorage.setItem('@todo_list', JSON.stringify(data));
-      this.getData();
+      await this.getData();
+      this.setModalVisible(!modalVisible);
     } else {
       if (title === '') {
         return ToastAndroid.showWithGravity(
@@ -238,17 +239,16 @@ class Home extends Component {
             <Text style={styles.textDateHeader}>{dateNow}</Text>
           </View>
         </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.content}>
-            <FlatList
-              numColumns={2}
-              data={this.state.todoList}
-              keyExtractor={this._keyExtractor}
-              renderItem={this.renderItem}
-              ListEmptyComponent={this.emptyData()}
-            />
-          </View>
-        </ScrollView>
+        <View style={styles.content}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            numColumns={2}
+            data={this.state.todoList}
+            keyExtractor={this._keyExtractor}
+            renderItem={this.renderItem}
+            ListEmptyComponent={this.emptyData()}
+          />
+        </View>
         <View style={styles.contentFab}>
           <TouchableOpacity
             onPress={() => {
