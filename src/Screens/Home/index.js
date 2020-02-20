@@ -112,7 +112,7 @@ class Home extends Component {
         ToastAndroid.CENTER,
       );
       AsyncStorage.setItem('@todo_list', JSON.stringify(data));
-      this.getTodo();
+      this.getData();
     } else {
       if (title === '') {
         return ToastAndroid.showWithGravity(
