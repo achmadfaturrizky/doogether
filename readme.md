@@ -24,7 +24,7 @@
 3. Install node modules with type `npm install` or `yarn install`
 4. Run App with type `react-native run-android`
 
-## Download the APK (TakChat)
+## Download the APK (DoogetherTest)
 You can Download the APK [`here`](https://drive.google.com/open?id=1Q0XcTZLKjREMX_LRTCXNssLIISnJt1hC)
 
 ## Screenshot from the App
